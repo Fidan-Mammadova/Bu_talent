@@ -247,7 +247,7 @@ watch(authError, (newError) => {
 
 <style scoped>
 .signin-form {
-  padding: 20px;
+  padding: 21px;
 }
 
 .form-header h4 {
