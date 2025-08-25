@@ -1,0 +1,857 @@
+{
+	"info": {
+		"_postman_id": "1d784d04-6ab1-425f-84af-b324bac61478",
+		"name": "BuTalent",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1965733",
+		"_collection_link": "https://projects-rasimaghayev.postman.co/workspace/My-Workspace~4e865d24-8877-4e72-8c5b-53e91c4b2264/collection/1965733-1d784d04-6ab1-425f-84af-b324bac61478?action=share&source=collection_link&creator=1965733"
+	},
+	"item": [
+		{
+			"name": "checks",
+			"item": [
+				{
+					"name": "db",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/check/db",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"check",
+								"db"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "health",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/check/health",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"check",
+								"health"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "static",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/check/static",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"check",
+								"static"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ip",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/check/ip",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"check",
+								"ip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "clear-cache",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Api-Version",
+								"value": "v1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/check/clear_cache",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"check",
+								"clear_cache"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auths",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Rasim Aghayev\",\r\n    \"email\":\"rasimalqayedv3214@gmail.com\",\r\n    \"password\":\"12345678\",\r\n    \"password_confirmation\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"rasimalqayedv3214@gmail.com\",\r\n    \"password\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Rasim sdsd Aghayev\",\r\n    \"password\":\"12345678\",\r\n    \"password_confirmation\":\"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/auth/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/refresh",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"refresh"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/auth/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customers",
+			"item": [
+				{
+					"name": "/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/customers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers"
+							],
+							"query": [
+								{
+									"key": "source[eq]",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "key[eq]",
+									"value": "aa",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"// Əvvəlki customerId-ni environment-dən və ya collection dəyişənindən götür\r",
+									"let lastCustomerId = pm.environment.get(\"customerId\") || pm.collectionVariables.get(\"customerId\");\r",
+									"\r",
+									"// // Əgər dəyişən mövcud deyilsə, 1-dən başla\r",
+									"if (!lastCustomerId || isNaN(lastCustomerId)) {\r",
+									"    lastCustomerId = 1;\r",
+									"} else {\r",
+									"    lastCustomerId = parseInt(lastCustomerId) + 1; // 1 artır\r",
+									"}\r",
+									"\r",
+									"\r",
+									"// Yeni customerId-ni environment və collection dəyişəninə yaz\r",
+									"pm.environment.set(\"customerId\", lastCustomerId);\r",
+									"pm.collectionVariables.set(\"customerId\", lastCustomerId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"A hold\",\r\n    \"type\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/customers",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/customers/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{customerId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{id}",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"L hold\",\r\n    \"type\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/customers/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{customerId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{id}",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"D hold\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/customers/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{customerId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{id}",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/customers/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customers",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{customerId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "orders",
+			"item": [
+				{
+					"name": "/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "er",
+									"disabled": true
+								},
+								{
+									"key": "include_tags",
+									"value": "true",
+									"disabled": true
+								},
+								{
+									"key": "orderBrand[ilk]",
+									"value": "jrl",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"// Əvvəlki orderId-ni environment-dən və ya collection dəyişənindən götür\r",
+									"let lastOrderId = pm.environment.get(\"orderId\") || pm.collectionVariables.get(\"orderId\");\r",
+									"\r",
+									"// // Əgər dəyişən mövcud deyilsə, 1-dən başla\r",
+									"if (!lastOrderId || isNaN(lastOrderId)) {\r",
+									"    lastOrderId = 1;\r",
+									"} else {\r",
+									"    lastOrderId = parseInt(lastOrderId) + 1; // 1 artır\r",
+									"}\r",
+									"\r",
+									"\r",
+									"// Yeni orderId-ni environment və collection dəyişəninə yaz\r",
+									"pm.environment.set(\"orderId\", lastOrderId);\r",
+									"pm.collectionVariables.set(\"orderId\", lastOrderId);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": \"{{customerId}}\",\r\n    \"orderBrand\": \"Ferrari\",\r\n    \"orderDate\": \"{{date}}\",\r\n    \"orderPrice\": \"{{price}}\",\r\n    \"orderStatus\": \"{{orderStatus}}\",\r\n    \"orderNote\": \"{{$randomLoremSentence}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/orders/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{id}",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": \"{{customerId}}\",\r\n    \"orderBrand\": \"Ferrari\",\r\n    \"orderDate\": \"{{date}}\",\r\n    \"orderPrice\": \"{{price}}\",\r\n    \"orderStatus\": \"{{orderStatus}}\",\r\n    \"orderNote\": \"{{$randomLoremSentence}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/orders/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{id}",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    // \"customerId\": \"{{customerId}}\",\r\n    // \"orderBrand\": \"Ferrari\",\r\n    \"orderDate\": \"{{date}}\",\r\n    \"orderPrice\": \"{{price}}\",\r\n    \"orderStatus\": \"{{orderStatus}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/orders/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/{id}",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/orders/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"orders",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "{{orderId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"let today = new Date();\r",
+					"let randomOffset = Math.floor(Math.random() * 120) - 60; // Range -60 to +59\r",
+					"today.setDate(today.getDate() + randomOffset);\r",
+					"let formattedDate = today.toISOString().split('T')[0];\r",
+					"\r",
+					"pm.environment.set(\"date\", formattedDate);\r",
+					"pm.environment.set(\"dueDate\", formattedDate);\r",
+					"\r",
+					"// 100000 ilə 300000 arasında təsadüfi rəqəm yaradılır\r",
+					"function getRandomPrice(min, max) {\r",
+					"    return Math.floor(Math.random() * (max - min + 1)) + min;\r",
+					"}\r",
+					"function generateVIN() {\r",
+					"    let chars = \"ABCDEFGHJKLMNPRSTUVWXYZ0123456789\"; // VIN üçün uyğun simvollar\r",
+					"    let vin = \"\";\r",
+					"    for (let i = 0; i < 17; i++) {\r",
+					"        vin += chars.charAt(Math.floor(Math.random() * chars.length));\r",
+					"    }\r",
+					"    return vin;\r",
+					"}\r",
+					"\r",
+					"// Dəyəri Postman environment dəyişəni kimi saxlayırıq\r",
+					"pm.environment.set(\"price\", getRandomPrice(100000, 300000));\r",
+					"pm.environment.set(\"concessionPrice\", getRandomPrice(2000, 30000));\r",
+					"pm.environment.set(\"orderStatus\", getRandomPrice(1, 6));\r",
+					"pm.environment.set(\"orderStatus2\", getRandomPrice(1, 6));\r",
+					"// VIN dəyərini Postman environment dəyişəninə yazırıq\r",
+					"pm.environment.set(\"factoryInvoiceVin\", generateVIN());\r",
+					"\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://127.0.0.1:8000/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NDY2NDk3NDIsImV4cCI6MTc0NjY1MzM0MiwibmJmIjoxNzQ2NjQ5NzQyLCJqdGkiOiIwSkxBc3FWMURpNVFXdlEzIiwic3ViIjoiMyIsInBydiI6Ijc1N2U5ZmY0ZDRkOTVjNmNmYTQ0NGRjNzRjYzBiMmVjMGUzOWMwZDcifQ.N0AzvU02GmuB_HCZLXs-g2DXMB9XEHgK8sc3-QpHxoo",
+			"type": "string"
+		}
+	]
+}

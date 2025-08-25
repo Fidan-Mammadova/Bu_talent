@@ -1,0 +1,234 @@
+name: "butalent"
+networks:
+  BuTalent:
+    name: BuTalent
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    container_name: nginx_bt
+    depends_on:
+      - pgsql
+      - php
+#      - npmnx
+    ports:
+      - "${APP_PORT:-80}:80"
+      - "${APP_PORT_SSL:-443}:443"
+    env_file:
+      - .env
+    volumes:
+      - ./src/be:/var/www/html/be:delegated
+      - ./.env:/var/www/html/be/.env:ro
+    networks:
+      - BuTalent
+
+  php:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: php_bt
+    volumes:
+      - ./src/be:/var/www/html/be:delegated
+      - ./.env:/var/www/html/be/.env
+      - ./docker-include.txt:/var/www/html/docker-include.txt:ro
+    env_file:
+      - .env
+    networks:
+      - BuTalent
+
+  composer:
+    build:
+      context: .
+      dockerfile: composer.dockerfile
+    container_name: composer
+    volumes:
+      - ./src/be:/var/www/html/be:delegated
+      - ./.env:/var/www/html/be/.env:ro
+    working_dir: /var/www/html/be
+    env_file:
+      - .env
+    networks:
+      - BuTalent
+
+  artisan:
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: artisan
+    env_file:
+      - .env
+    volumes:
+      - ./src/be:/var/www/html/be:delegated
+      - ./.env:/var/www/html/be/.env:ro
+    working_dir: /var/www/html/be
+    entrypoint: ["php", "artisan"]
+    networks:
+      - BuTalent
+
+#  phpunit:
+#    build:
+#      context: .
+#      dockerfile: php.dockerfile
+#    container_name: phpunit
+#    env_file:
+#      - .env
+#    volumes:
+#      - ./src/be:/var/www/html/be
+#    working_dir: /var/www/html/be
+#    entrypoint: ["/var/www/html/be/vendor/bin/phpunit"]
+#    networks:
+#      - BuTalent
+
+  pgsql:
+    build:
+      context: .
+      dockerfile: postgres.dockerfile
+    container_name: pgsql_bt
+    restart: always
+    shm_size: 128mb
+    ports:
+      - "6432:5432"
+    volumes:
+      - ./db/postgres:/var/lib/postgresql/data #:delegated
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-myapp}
+      POSTGRES_USER: ${DB_USERNAME:-myapp}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-mypassword}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    # deploy:
+    #   resources:
+    #     limits:
+    #       memory: 1G
+    #     reservations:
+    #       memory: 512M
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${DB_USERNAME:-myapp}", "-d", "${DB_DATABASE:-myapp}"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      - BuTalent
+#
+#  mysql:
+#    build:
+#      context: .
+#      dockerfile: mysql.dockerfile
+#    container_name: mysql
+#    restart: always
+#    ports:
+#      - "4306:3306"
+#    volumes:
+#      - ./db/mysql:/var/lib/mysql:delegated
+#    env_file:
+#      - .env
+#    environment:
+#      MYSQL_DATABASE: ${DB_DATABASE:-myapp}
+#      MYSQL_USER: ${DB_USERNAME:-myapp}
+#      MYSQL_PASSWORD: ${DB_PASSWORD:-mypassword}
+#      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-rootpassword}
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 1G
+#        reservations:
+#          memory: 512M
+#    healthcheck:
+#      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u$$MYSQL_USER", "-p$$MYSQL_PASSWORD"]
+#      interval: 30s
+#      timeout: 5s
+#      retries: 3
+#    networks:
+#      - BuTalent
+
+#  mongodb:
+#    image: mongo:latest
+#    container_name: mongodb_container
+#    env_file:
+#      - .env
+#    ports:
+#      - "37017:${MONGO_INITDB_PORT:-27017}"
+#    volumes:
+#      - ./db/mongo:/data/db:delegated
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: ${MONGO_INITDB_ROOT_USERNAME}
+#      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_INITDB_ROOT_PASSWORD}
+
+#  npmnx:
+#    build:
+#      context: .
+#      dockerfile: node.dockerfile
+#    container_name: npmnx
+#    restart: unless-stopped
+#    env_file:
+#      - .env
+#    volumes:
+#      - ./src/fe:/var/www/html/fe:delegated
+#    ports:
+#      - "5000:${FE_PORT:-3000}"
+#    working_dir: /var/www/html/fe
+#    environment:
+#      - NODE_ENV=development
+#    entrypoint: ["npm","run","dev"]
+#    networks:
+#      - BuTalent
+#    logging:
+#      driver: "json-file"
+#      options:
+#        max-size: "10m"
+#        max-file: "3"
+
+#  npm:
+#    image: node:current-alpine
+#    container_name: npm
+#    ports:
+#      - 5173:5173
+#    env_file:
+#      - .env
+#    volumes:
+#      - ./src/fe:/var/www/html/fe:delegated
+#    working_dir: /var/www/html/fe
+#    networks:
+#      - BuTalent
+
+#  npx:
+#    image: node:current-alpine
+#    container_name: npx
+#    env_file:
+#      - .env
+#    volumes:
+#      - ./src/fe:/var/www/html/fe:delegated
+#    working_dir: /var/www/html/fe
+#    entrypoint: ["npx"]
+#    networks:
+#      - BuTalent
+
+#  redis:
+#    image: redis:alpine
+#    container_name: redis
+#    command: redis-server --save 20 1 --loglevel warning
+#    ports:
+#      - "8002:6379"
+#    volumes:
+#      - ./db/redis:/data
+
+#secrets:
+#  db_connection:
+#    file: ./secrets/db_connection
+#  db_host:
+#    file: ./secrets/db_host
+#  db_port:
+#    file: ./secrets/db_port
+#  db_database:
+#    file: ./secrets/db_database
+#  db_username:
+#    file: ./secrets/db_username
+#  db_password:
+#    file: ./secrets/db_password
+#  db_root_password:
+#    file: ./secrets/db_root_password
+#  app_key:
+#    file: ./secrets/app_key
