@@ -45,6 +45,7 @@ docker compose up -d --build nginx --force-recreate
 docker compose exec -it -u root php bash
 chown -R www-data:www-data storage storage/app storage/framework storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache && chmod -R 777 storage storage/app storage/framework storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache
 
+
 ```
 
 
